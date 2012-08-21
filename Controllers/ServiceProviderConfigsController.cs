@@ -13,7 +13,7 @@ namespace EnjoyDialogs.SCIM.Controllers
     public class ServiceProviderConfigsController : ApiController
     {
         [System.Web.Http.HttpGet]
-        public ServiceProviderConfigsModel Get()
+        public ServiceProviderConfigModel Get()
         {
             //var result = new ServiceProviderConfigs
             //    {
@@ -54,7 +54,7 @@ namespace EnjoyDialogs.SCIM.Controllers
 
             var thisUrl = this.Request.RequestUri.Scheme + "://" + this.Request.RequestUri.Host;
 
-            var result = new ServiceProviderConfigsModel
+            var result = new ServiceProviderConfigModel
                 {
                     documentationUrl = thisUrl + "/help/scim",
                     patch = new PatchModel (),
