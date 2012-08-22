@@ -12,7 +12,7 @@ using StructureMap;
 
 namespace EnjoyDialogs.SCIM.Controllers
 {
-    [NotImplExceptionFilter]
+    [ScimExpceptionHandlerFilter]
     public class UsersController : ApiController
     {
         private readonly IUserService _userService;
@@ -46,15 +46,16 @@ namespace EnjoyDialogs.SCIM.Controllers
             var user = _userService.Get(id);
 
             if (user == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+            {
+                throw new ScimException(HttpStatusCode.NotFound , string.Format("Resource {0} not found", id));
+            }
+
 
             IContentNegotiator negotiator = this.Configuration.Services.GetContentNegotiator();
-
             ContentNegotiationResult result = negotiator.Negotiate(typeof (UserModel), this.Request, this.Configuration.Formatters);
             if (result == null)
             {
-                var response = new HttpResponseMessage(HttpStatusCode.NotAcceptable);
-                throw new HttpResponseException(response);
+                throw new ScimException(HttpStatusCode.NotAcceptable, "Server does not support requested operation");
             }
 
 
@@ -102,11 +103,11 @@ namespace EnjoyDialogs.SCIM.Controllers
         {
             var user = _userService.Delete(id);
             if (user == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            else
-                return new HttpResponseMessage(HttpStatusCode.NoContent); 
+            {
+                throw new ScimException(HttpStatusCode.NotFound, string.Format("Resource {0} not found", id));
+            }
 
-
+            return new HttpResponseMessage(HttpStatusCode.NoContent);
         }
     }
 }

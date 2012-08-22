@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
+using EnjoyDialogs.SCIM.Infrastructure;
 using EnjoyDialogs.SCIM.Models;
 using EnjoyDialogs.SCIM.Services;
 using StructureMap;
@@ -12,6 +8,7 @@ using StructureMap;
 
 namespace EnjoyDialogs.SCIM.Controllers
 {
+    [ScimExpceptionHandlerFilter]
     public class ServiceProviderConfigsController : ApiController
     {
         [System.Web.Http.HttpGet]

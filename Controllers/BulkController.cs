@@ -8,7 +8,7 @@ using EnjoyDialogs.SCIM.Infrastructure;
 
 namespace EnjoyDialogs.SCIM.Controllers
 {
-    [NotImplExceptionFilter]
+    [ScimExpceptionHandlerFilter]
     public class BulkController : ApiController
     {
         [HttpGet]

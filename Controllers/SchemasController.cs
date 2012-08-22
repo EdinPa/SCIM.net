@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Web.Http;
+using EnjoyDialogs.SCIM.Infrastructure;
 using EnjoyDialogs.SCIM.Models;
 
 namespace EnjoyDialogs.SCIM.Controllers
 {
+    [ScimExpceptionHandlerFilter]
     public class SchemasController : ApiController
     {
         [HttpGet]

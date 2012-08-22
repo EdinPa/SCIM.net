@@ -166,9 +166,11 @@
     <Compile Include="Code\DependencyResolution\ProjectRegistry.cs" />
     <Compile Include="Code\Infrastructure\ApiDocAttribute.cs" />
     <Compile Include="Code\Infrastructure\ApiKeyHandler.cs" />
+    <Compile Include="Code\Infrastructure\ExpceptionHandlerFilterAttribute.cs" />
     <Compile Include="Code\Infrastructure\MethodOverrideHandler.cs" />
-    <Compile Include="Code\Infrastructure\NotImplExceptionFilterAttribute.cs" />
     <Compile Include="Code\Infrastructure\RemoveServerHeaderModule.cs" />
+    <Compile Include="Code\Infrastructure\ScimException.cs" />
+    <Compile Include="Code\Models\ErrorModel.cs" />
     <Compile Include="Code\Models\ServiceProviderConfig\PatchModel.cs" />
     <Compile Include="Code\Models\ServiceProviderConfig\FilterModel.cs" />
     <Compile Include="Code\Models\ServiceProviderConfig\ChangePasswordModel.cs" />
