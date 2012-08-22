@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using EnjoyDialogs.SCIM.Infrastructure;
+using Newtonsoft.Json;
 
 namespace EnjoyDialogs.SCIM.Models
 {
+    
     public class UserModel : SchemaBaseModel
     {
         /// <summary>
@@ -14,29 +14,32 @@ namespace EnjoyDialogs.SCIM.Models
         /// It MUST be a stable, non-reassignable identifier that does not change when the same resource is returned in subsequent requests. 
         /// The value of the id attribute is always issued by the Service Provider and MUST never be specified by the Service Consumer. REQUIRED.
         /// </summary>
-        public Guid id { get; set; }
-        public string userName { get; set; }
+        [JsonProperty(Required = Required.Always)]
+        public Guid Id { get; set; }
 
-        public string externalId { get; set; }
-        public NameModel[] name { get; set; }
-        public string displayName { get; set; }
-        public string nickName { get; set; }
-        public string profileUrl { get; set; }
-        public EmailModel[] emails { get; set; }
-        public AddressModel[] addresses { get; set; }
-        public PhoneNumberModel[] phoneNumbers { get; set; }
-        public InstantMessagingModel[] ims { get; set; }
-        public PhotoModel[] photos { get; set; }
-        public string userType { get; set; }
-        public string title { get; set; }
-        public string preferredLanguage { get; set; }
-        public string locale { get; set; }
-        public string timezonoe { get; set; }
-        public bool active { get; set; }
-        public string password { get; set; }
-        public GroupMembershipModel[] groups { get; set; }
-        public x509CertificateModel[] x509Certificates { get; set; }
-        public MetaModel meta { get; set; }
+        [JsonProperty(Required = Required.Always)]
+        public string UserName { get; set; }
+
+        public string ExternalId { get; set; }
+        public NameModel[] Name { get; set; }
+        public string DisplayName { get; set; }
+        public string NickName { get; set; }
+        public string ProfileUrl { get; set; }
+        public EmailModel[] Emails { get; set; }
+        public AddressModel[] Addresses { get; set; }
+        public PhoneNumberModel[] PhoneNumbers { get; set; }
+        public InstantMessagingModel[] Ims { get; set; }
+        public PhotoModel[] Photos { get; set; }
+        public string UserType { get; set; }
+        public string Title { get; set; }
+        public string PreferredLanguage { get; set; }
+        public string Locale { get; set; }
+        public string Timezonoe { get; set; }
+        public bool Active { get; set; }
+        public string Password { get; set; }
+        public GroupMembershipModel[] Groups { get; set; }
+        public x509CertificateModel[] X509Certificates { get; set; }
+        public MetaModel Meta { get; set; }
     }
 
     public class EnterpriseUserModel : UserModel

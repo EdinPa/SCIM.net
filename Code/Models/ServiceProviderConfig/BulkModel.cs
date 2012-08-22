@@ -1,27 +1,30 @@
 ﻿
-
-using System.ComponentModel.DataAnnotations;
-
 namespace EnjoyDialogs.SCIM.Models
 {
+    using System.ComponentModel.DataAnnotations;
+    using Newtonsoft.Json;
+
     public class BulkModel
     {
         /// <summary>
-        /// Boolean value specifying whether the operation is supported.
+        /// Boolean value specifying whether the operation is Supported.
         /// </summary>
         [Required]
-        public bool supported { get { return false; } }
+        [JsonProperty(Required = Required.Always)]
+        public bool Supported { get { return false; } }
 
         /// <summary>
         /// An integer value specifying the maximum number of operations.
         /// </summary>
         [Required]
-        public int maxOperations { get; set; }
+        [JsonProperty(Required = Required.Always)]
+        public int MaxOperations { get; set; }
 
         /// <summary>
         /// An integer value specifying the maximum payload size in bytes.
         /// </summary>
         [Required]
-        public int maxPayloadSize { get; set; }
+        [JsonProperty(Required = Required.Always)]
+        public int MaxPayloadSize { get; set; }
     }
 }

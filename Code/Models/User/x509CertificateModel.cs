@@ -3,7 +3,7 @@ namespace EnjoyDialogs.SCIM.Models
 {
     public class x509CertificateModel
     {
-        public string value { get; set; }
+        public string Value { get; set; }
     }
 
 }

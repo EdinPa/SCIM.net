@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Mvc;
 using EnjoyDialogs.SCIM.Models;
+using EnjoyDialogs.SCIM.Services;
+using StructureMap;
 
 
 namespace EnjoyDialogs.SCIM.Controllers
@@ -22,7 +24,7 @@ namespace EnjoyDialogs.SCIM.Controllers
             //        externalid = "bjensen",
             //        meta = new Meta
             //            {
-            //                created = DateTime.Now,
+            //                Created = DateTime.Now,
             //                lastModified = DateTime.Now,
             //                location = "http://scim.azurewebsites.net/v1/Users/2819c223-7f76-453a-919d-413861904646",
             //                version = "f250dd84f0671c3"
@@ -52,43 +54,46 @@ namespace EnjoyDialogs.SCIM.Controllers
             //                }
             //    };
 
+
+            var svc = ObjectFactory.GetInstance<IUserService>();
+
             var thisUrl = this.Request.RequestUri.Scheme + "://" + this.Request.RequestUri.Host;
 
             var result = new ServiceProviderConfigModel
                 {
-                    documentationUrl = thisUrl + "/help/scim",
-                    patch = new PatchModel (),
-                    bulk = new BulkModel
+                    DocumentationUrl = thisUrl + "/help/scim",
+                    Patch = new PatchModel (),
+                    Bulk = new BulkModel
                         {
-                            maxOperations = 1000,
-                            maxPayloadSize = 200
+                            MaxOperations = 1000,
+                            MaxPayloadSize = 200
                         },
-                    filter = new FilterModel
+                    Filter = new FilterModel
                         {
-                            maxResults = 200
+                            MaxResults = 200
                         },
-                    changePassword = new ChangePasswordModel (),
-                    sort = new SortModel (),
-                    etag = new EtagModel (),
-                    xmlDataFormat = new XmlDataFormatModel (),
-                    authenticationSchemes = new[]
+                    ChangePassword = new ChangePasswordModel (),
+                    Sort = new SortModel (),
+                    Etag = new EtagModel (),
+                    XmlDataFormat = new XmlDataFormatModel (),
+                    AuthenticationSchemes = new[]
                         {
                             new AuthenticationScheme
                                 {
-                                    name = "OAuth Bearer Token",
-                                    description = "Authentication Scheme using the OAuth Bearer Token Standard",
-                                    specUrl = "http://tools.ietf.org/html/draft-ietf-oauth-v2-bearer-01",
-                                    documentationUrl = thisUrl + "/help/oauth",
-                                    type = "oauthbearertoken",
-                                    primary = true
+                                    Name = "OAuth Bearer Token",
+                                    Description = "Authentication Scheme using the OAuth Bearer Token Standard",
+                                    SpecUrl = "http://tools.ietf.org/html/draft-ietf-oauth-v2-bearer-01",
+                                    DocumentationUrl = thisUrl + "/help/oauth",
+                                    Type = "oauthbearertoken",
+                                    Primary = true
                                 },
                             new AuthenticationScheme
                                 {
-                                    name = "HTTP Basic",
-                                    description = "Authentication Scheme using the Http Basic Standard",
-                                    specUrl = "http://www.ietf.org/rfc/rfc2617.txt",
-                                    documentationUrl = thisUrl + "/help/httpBasic",
-                                    type = "httpbasic"
+                                    Name = "HTTP Basic",
+                                    Description = "Authentication Scheme using the Http Basic Standard",
+                                    SpecUrl = "http://www.ietf.org/rfc/rfc2617.txt",
+                                    DocumentationUrl = thisUrl + "/help/httpBasic",
+                                    Type = "httpbasic"
 
                                 }
                         }

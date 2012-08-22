@@ -1,9 +1,9 @@
 ﻿
-
-using System.ComponentModel.DataAnnotations;
-
 namespace EnjoyDialogs.SCIM.Models
 {
+    using System.ComponentModel.DataAnnotations;
+    using Newtonsoft.Json;
+
     /// <summary>
     /// The Service Provider Configuration Resource enables a Service Provider to expose its compliance with the SCIM specification 
     /// in a standardized form as well as provide additional implementation details to Consumers.
@@ -13,49 +13,56 @@ namespace EnjoyDialogs.SCIM.Models
         /// <summary>
         /// An HTTP addressable URL pointing to the Service Provider's human consumable help documentation.
         /// </summary>
-        public string documentationUrl { get; set; }
+        public string DocumentationUrl { get; set; }
 
         /// <summary>
         /// A complex type that specifies PATCH configuration options.
         /// </summary>
         [Required]
-        public PatchModel patch { get; set; }
+        [JsonProperty(Required = Required.Always)]
+        public PatchModel Patch { get; set; }
 
         /// <summary>
         /// A complex type that specifies BULK configuration options
         /// </summary>
         [Required]
-        public BulkModel bulk { get; set; }
+        [JsonProperty(Required = Required.Always)]
+        public BulkModel Bulk { get; set; }
 
         /// <summary>
         /// A complex type that specifies FILTER options.
         /// </summary>
         [Required]
-        public FilterModel filter { get; set; }
+        [JsonProperty(Required = Required.Always)]
+        public FilterModel Filter { get; set; }
 
         /// <summary>
         ///  A complex type that specifies Change Password configuration options.
         /// </summary>
         [Required]
-        public ChangePasswordModel changePassword { get; set; }
+        [JsonProperty(Required = Required.Always)]
+        public ChangePasswordModel ChangePassword { get; set; }
 
         /// <summary>
         /// A complex type that specifies Sort configuration options.
         /// </summary>
         [Required]
-        public SortModel sort { get; set; }
+        [JsonProperty(Required = Required.Always)]
+        public SortModel Sort { get; set; }
 
         /// <summary>
         /// A complex type that specifies Etag configuration options.
         /// </summary>
         [Required]
-        public EtagModel etag { get; set; }
+        [JsonProperty(Required = Required.Always)]
+        public EtagModel Etag { get; set; }
 
         /// <summary>
         /// A complex type that specifies whether the XML data format is supported.
         /// </summary>
         [Required]
-        public XmlDataFormatModel xmlDataFormat { get; set; }
+        [JsonProperty(Required = Required.Always)]
+        public XmlDataFormatModel XmlDataFormat { get; set; }
 
         /// <summary>
         /// A complex type that specifies supported Authentication Scheme properties.  Instead of the standard Canonical Values for type, 
@@ -64,6 +71,7 @@ namespace EnjoyDialogs.SCIM.Models
         /// make the authenticationSchemes attribute publicly accessible without prior authentication.
         /// </summary>
         [Required]
-        public AuthenticationScheme[] authenticationSchemes { get; set; }
+        [JsonProperty(Required = Required.Always)]
+        public AuthenticationScheme[] AuthenticationSchemes { get; set; }
     }
 }

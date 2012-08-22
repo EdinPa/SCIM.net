@@ -3,7 +3,9 @@ namespace EnjoyDialogs.SCIM.Models
 {
     public class PhoneNumberModel
     {
-        public string value { get; set; }
-        public string type { get; set; }
+        public string Value { get; set; }
+        public string Type { get; set; }
+
+        public bool Primary { get; set; }
     }
 }

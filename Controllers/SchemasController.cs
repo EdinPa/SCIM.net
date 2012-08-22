@@ -7,163 +7,164 @@ namespace EnjoyDialogs.SCIM.Controllers
     public class SchemasController : ApiController
     {
         [HttpGet]
-        public SchemaModel Users(string id)
+        public SchemaModel Users(string id = "Users")
         {
             SchemaModel result;
             if (id.ToLower() == "groups")
             {
+                #region Group SchemaModel
                 result = new SchemaModel
                     {
-                        id = Consts.DEFAULT_SCHEMA + ":Group",
-                        name = "Group",
-                        description = "Core Group",
-                        schema = Consts.DEFAULT_SCHEMA,
-                        endpoint = "/Groups",
-                        attributes = new[]
+                        Id = Consts.DEFAULT_SCHEMA + ":Group",
+                        Name = "Group",
+                        Description = "Core Group",
+                        Schema = Consts.DEFAULT_SCHEMA,
+                        Endpoint = "/Groups",
+                        Attributes = new[]
                             {
                                 new SchemaAttributeModel
                                     {
-                                        name = "id",
-                                        type = "string",
-                                        multiValued = false,
-                                        description =
-                                            "Unique identifier for the SCIM resource as defined by the Service Provider. Each representation of the resource MUST include a non-empty id value. This identifier MUST be unique across the Service Provider's entire set of resources. It MUST be a stable, non-reassignable identifier that does not change when the same resource is returned in subsequent requests. The value of the id attribute is always issued by the Service Provider and MUST never be specified by the Service Consumer. REQUIRED.",
-                                        schema = Consts.DEFAULT_SCHEMA,
-                                        readOnly = true,
-                                        required = true,
-                                        caseExact = false
+                                        Name = "id",
+                                        Type = "string",
+                                        MultiValued = false,
+                                        Description = "Unique identifier for the SCIM resource as defined by the Service Provider. Each representation of the resource MUST include a non-empty id value. This identifier MUST be unique across the Service Provider's entire set of resources. It MUST be a stable, non-reassignable identifier that does not change when the same resource is returned in subsequent requests. The value of the id attribute is always issued by the Service Provider and MUST never be specified by the Service Consumer. REQUIRED.",
+                                        Schema = Consts.DEFAULT_SCHEMA,
+                                        ReadOnly = true,
+                                        Required = true,
+                                        CaseExact = false
                                     },
                                 new SchemaAttributeModel
                                     {
-                                        name = "displayName",
-                                        type = "string",
-                                        multiValued = false,
-                                        description = "Unique displayName. REQUIRED.",
-                                        schema = Consts.DEFAULT_SCHEMA,
-                                        readOnly = true,
-                                        required = true,
-                                        caseExact = false
+                                        Name = "displayName",
+                                        Type = "string",
+                                        MultiValued = false,
+                                        Description = "Unique displayName. REQUIRED.",
+                                        Schema = Consts.DEFAULT_SCHEMA,
+                                        ReadOnly = true,
+                                        Required = true,
+                                        CaseExact = false
                                     },
                                 new SchemaAttributeModel
                                     {
-                                        name = "members",
-                                        type = "complex",
-                                        multiValued = true,
-                                        description = "List of members",
-                                        schema = Consts.DEFAULT_SCHEMA,
-                                        readOnly = false,
-                                        required = false,
-                                        caseExact = false,
-                                        subAttributes = new[]
+                                        Name = "members",
+                                        Type = "complex",
+                                        MultiValued = true,
+                                        Description = "List of members",
+                                        Schema = Consts.DEFAULT_SCHEMA,
+                                        ReadOnly = false,
+                                        Required = false,
+                                        CaseExact = false,
+                                        SubAttributes = new[]
                                             {
                                                 new SchemaAttributeModel
                                                     {
-                                                        name = "value",
-                                                        type = "string",
-                                                        multiValued = false,
-                                                        description = "Unique identifier for this group member",
-                                                        schema = Consts.DEFAULT_SCHEMA,
-                                                        readOnly = true,
-                                                        required = true,
-                                                        caseExact = false
+                                                        Name = "value",
+                                                        Type = "string",
+                                                        MultiValued = false,
+                                                        Description = "Unique identifier for this group member",
+                                                        Schema = Consts.DEFAULT_SCHEMA,
+                                                        ReadOnly = true,
+                                                        Required = true,
+                                                        CaseExact = false
                                                     },
                                                 new SchemaAttributeModel
                                                     {
-                                                        name = "display",
-                                                        type = "string",
-                                                        multiValued = false,
-                                                        description = "",
-                                                        schema = Consts.DEFAULT_SCHEMA,
-                                                        readOnly = true,
-                                                        required = true,
-                                                        caseExact = false
+                                                        Name = "display",
+                                                        Type = "string",
+                                                        MultiValued = false,
+                                                        Description = "",
+                                                        Schema = Consts.DEFAULT_SCHEMA,
+                                                        ReadOnly = true,
+                                                        Required = true,
+                                                        CaseExact = false
                                                     }
                                             }
                                     }
                             }
                     };
+                #endregion
             }
             else
             {
+                #region User SchemaModel
                 result = new SchemaModel
                     {
-                        id = Consts.DEFAULT_SCHEMA + ":User",
-                        name = "User",
-                        description = "Core User",
-                        schema = Consts.DEFAULT_SCHEMA,
-                        endpoint = "/Users",
-                        attributes = new[]
+                        Id = Consts.DEFAULT_SCHEMA + ":User",
+                        Name = "User",
+                        Description = "Core User",
+                        Schema = Consts.DEFAULT_SCHEMA,
+                        Endpoint = "/Users",
+                        Attributes = new[]
                             {
                                 new SchemaAttributeModel
                                     {
-                                        name = "id",
-                                        type = "string",
-                                        multiValued = false,
-                                        description =
-                                            "Unique identifier for the SCIM resource as defined by the Service Provider. Each representation of the resource MUST include a non-empty id value. This identifier MUST be unique across the Service Provider's entire set of resources. It MUST be a stable, non-reassignable identifier that does not change when the same resource is returned in subsequent requests. The value of the id attribute is always issued by the Service Provider and MUST never be specified by the Service Consumer. REQUIRED.",
-                                        schema = Consts.DEFAULT_SCHEMA,
-                                        readOnly = true,
-                                        required = true,
-                                        caseExact = false
+                                        Name = "id",
+                                        Type = "string",
+                                        MultiValued = false,
+                                        Description = "Unique identifier for the SCIM resource as defined by the Service Provider. Each representation of the resource MUST include a non-empty id value. This identifier MUST be unique across the Service Provider's entire set of resources. It MUST be a stable, non-reassignable identifier that does not change when the same resource is returned in subsequent requests. The value of the id attribute is always issued by the Service Provider and MUST never be specified by the Service Consumer. REQUIRED.",
+                                        Schema = Consts.DEFAULT_SCHEMA,
+                                        ReadOnly = true,
+                                        Required = true,
+                                        CaseExact = false
                                     },
                                 new SchemaAttributeModel
                                     {
-                                        name = "userName",
-                                        type = "string",
-                                        multiValued = false,
-                                        description = "Unique userName. REQUIRED.",
-                                        schema = Consts.DEFAULT_SCHEMA,
-                                        readOnly = true,
-                                        required = true,
-                                        caseExact = false
+                                        Name = "userName",
+                                        Type = "string",
+                                        MultiValued = false,
+                                        Description = "Unique userName. REQUIRED.",
+                                        Schema = Consts.DEFAULT_SCHEMA,
+                                        ReadOnly = true,
+                                        Required = true,
+                                        CaseExact = false
                                     },
                                 new SchemaAttributeModel
                                     {
-                                        name = "externalId",
-                                        type = "string",
-                                        multiValued = false,
-                                        description = "",
-                                        schema = Consts.DEFAULT_SCHEMA,
-                                        readOnly = true,
-                                        required = false,
-                                        caseExact = false
+                                        Name = "externalId",
+                                        Type = "string",
+                                        MultiValued = false,
+                                        Description = "",
+                                        Schema = Consts.DEFAULT_SCHEMA,
+                                        ReadOnly = true,
+                                        Required = false,
+                                        CaseExact = false
                                     },
                                 new SchemaAttributeModel
                                     {
-                                        name = "name",
-                                        type = "complex",
-                                        multiValued = false,
-                                        description = "",
-                                        schema = Consts.DEFAULT_SCHEMA,
-                                        readOnly = true,
-                                        required = false,
-                                        caseExact = false
+                                        Name = "name",
+                                        Type = "complex",
+                                        MultiValued = false,
+                                        Description = "",
+                                        Schema = Consts.DEFAULT_SCHEMA,
+                                        ReadOnly = true,
+                                        Required = false,
+                                        CaseExact = false
                                     },
                                 new SchemaAttributeModel
                                     {
-                                        name = "nickName",
-                                        type = "string",
-                                        multiValued = false,
-                                        description = "",
-                                        schema = Consts.DEFAULT_SCHEMA,
-                                        readOnly = true,
-                                        required = false,
-                                        caseExact = false
+                                        Name = "nickName",
+                                        Type = "string",
+                                        MultiValued = false,
+                                        Description = "",
+                                        Schema = Consts.DEFAULT_SCHEMA,
+                                        ReadOnly = true,
+                                        Required = false,
+                                        CaseExact = false
                                     },
                                 new SchemaAttributeModel
                                     {
-                                        name = "profileUrl",
-                                        type = "string",
-                                        multiValued = false,
-                                        description = "",
-                                        schema = Consts.DEFAULT_SCHEMA,
-                                        readOnly = true,
-                                        required = false,
-                                        caseExact = false
+                                        Name = "profileUrl",
+                                        Type = "string",
+                                        MultiValued = false,
+                                        Description = "",
+                                        Schema = Consts.DEFAULT_SCHEMA,
+                                        ReadOnly = true,
+                                        Required = false,
+                                        CaseExact = false
                                     }
                             }
                     };
-
+                #endregion
             }
 
             return result;

@@ -1,11 +1,18 @@
-﻿using System;
-
+﻿
 namespace EnjoyDialogs.SCIM.Models
 {
+    using System;
+    using Newtonsoft.Json;
+
     public class GroupModel : SchemaBaseModel
     {
-        public Guid id { get; set; }
-        public string displayName { get; set; }
-        public GroupMemberModel[] members { get; set; }
+        [JsonProperty(Required = Required.Always)]
+        public Guid Id { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
+        public string DisplayName { get; set; }
+
+
+        public GroupMemberModel[] Members { get; set; }
     }
 }
