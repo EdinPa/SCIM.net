@@ -5,6 +5,7 @@ using EnjoyDialogs.SCIM.Models;
 
 namespace EnjoyDialogs.SCIM.Controllers
 {
+    [AllowAnonymous]
     [ScimExpceptionHandlerFilter]
     public class SchemasController : ApiController
     {

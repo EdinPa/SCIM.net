@@ -12,13 +12,14 @@ using StructureMap;
 
 namespace EnjoyDialogs.SCIM.Controllers
 {
+    [Authorize]
     [ScimExpceptionHandlerFilter]
     public class GroupsController : ApiController
     {
-                private readonly IGroupService _groupService;
+        private readonly IGroupService _groupService;
 
-        public GroupsController ()
-                    : this(ObjectFactory.GetInstance<IGroupService>())
+        public GroupsController()
+            : this(ObjectFactory.GetInstance<IGroupService>())
         {
         }
 
@@ -51,7 +52,7 @@ namespace EnjoyDialogs.SCIM.Controllers
 
 
             IContentNegotiator negotiator = this.Configuration.Services.GetContentNegotiator();
-            ContentNegotiationResult result = negotiator.Negotiate(typeof(UserModel), this.Request, this.Configuration.Formatters);
+            ContentNegotiationResult result = negotiator.Negotiate(typeof (UserModel), this.Request, this.Configuration.Formatters);
             if (result == null)
             {
                 throw new ScimException(HttpStatusCode.NotAcceptable, "Server does not support requested operation");
@@ -59,18 +60,18 @@ namespace EnjoyDialogs.SCIM.Controllers
 
 
             return new HttpResponseMessage()
-            {
-                Content = new ObjectContent<GroupModel>(
-                    group, // What we are serializing  
-                    result.Formatter, // The media formatter 
-                    result.MediaType.MediaType // The MIME type 
-                    )
-            };
+                {
+                    Content = new ObjectContent<GroupModel>(
+                        group, // What we are serializing  
+                        result.Formatter, // The media formatter 
+                        result.MediaType.MediaType // The MIME type 
+                        )
+                };
         }
 
         // POST v1/Groups
         [HttpPost]
-        public HttpResponseMessage Post([FromBody]string value)
+        public HttpResponseMessage Post([FromBody] string value)
         {
             throw new NotImplementedException();
 
@@ -78,14 +79,14 @@ namespace EnjoyDialogs.SCIM.Controllers
 
             var response = Request.CreateResponse<GroupModel>(HttpStatusCode.Created, item);
 
-            string uri = Url.Link("DefaultApi", new { id = item.Id });
+            string uri = Url.Link("DefaultApi", new {id = item.Id});
             response.Headers.Location = new Uri(uri);
-            return response; 
+            return response;
         }
 
         // PUT v1/Groups/5
         [HttpPut]
-        public HttpResponseMessage Put(Guid id, [FromBody]string value)
+        public HttpResponseMessage Put(Guid id, [FromBody] string value)
         {
             throw new NotImplementedException();
         }

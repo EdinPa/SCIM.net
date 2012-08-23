@@ -8,6 +8,7 @@ using EnjoyDialogs.SCIM.Infrastructure;
 
 namespace EnjoyDialogs.SCIM.Controllers
 {
+    [Authorize]
     [ScimExpceptionHandlerFilter]
     public class BulkController : ApiController
     {

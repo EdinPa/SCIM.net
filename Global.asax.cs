@@ -36,6 +36,7 @@ namespace EnjoyDialogs.SCIM
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             FormatingConfig.Configure(GlobalConfiguration.Configuration);
+            AuthProvidersConfig.RegisterAuthProvider(GlobalConfiguration.Configuration);
 
             GlobalConfiguration.Configuration.Services.Replace(typeof(IDocumentationProvider), new DocProvider());
 

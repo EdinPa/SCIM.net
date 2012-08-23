@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Http;
+﻿using System.Web.Http;
 using EnjoyDialogs.SCIM.Infrastructure;
 using EnjoyDialogs.SCIM.Models;
 using EnjoyDialogs.SCIM.Services;
@@ -8,6 +7,7 @@ using StructureMap;
 
 namespace EnjoyDialogs.SCIM.Controllers
 {
+    [AllowAnonymous]
     [ScimExpceptionHandlerFilter]
     public class ServiceProviderConfigsController : ApiController
     {
@@ -73,6 +73,8 @@ namespace EnjoyDialogs.SCIM.Controllers
                     Sort = new SortModel (),
                     Etag = new EtagModel (),
                     XmlDataFormat = new XmlDataFormatModel (),
+
+                    //TODO Read
                     AuthenticationSchemes = new[]
                         {
                             new AuthenticationScheme

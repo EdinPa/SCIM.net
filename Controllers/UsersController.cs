@@ -12,6 +12,7 @@ using StructureMap;
 
 namespace EnjoyDialogs.SCIM.Controllers
 {
+    [Authorize]
     [ScimExpceptionHandlerFilter]
     public class UsersController : ApiController
     {
