@@ -30,7 +30,7 @@ namespace EnjoyDialogs.SCIM.Services
 
         public void Update(UserModel updatedUser)
         {
-            var existing = Get(updatedUser.Id);
+            var existing = Get(updatedUser.Id.GetValueOrDefault());
             if (existing != null)
             {
                 existing.DisplayName = updatedUser.DisplayName;

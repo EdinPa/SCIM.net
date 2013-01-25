@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Dependencies;
 using System.Web.Mvc;
+using EnjoyDialogs.SCIM.DependencyResolution;
 
 namespace EnjoyDialogs.SCIM
 {

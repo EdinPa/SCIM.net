@@ -2,7 +2,7 @@
 using EnjoyDialogs.SCIM.Services;
 using StructureMap.Configuration.DSL;
 
-namespace EnjoyDialogs.SCIM.DependencyInjection
+namespace EnjoyDialogs.SCIM.DependencyResolution
 {
     [CLSCompliant(false)]
     public class ProjectRegistry : Registry

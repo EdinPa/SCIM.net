@@ -1,10 +1,12 @@
 ﻿using System;
+using EnjoyDialogs.SCIM.Helpers;
 using EnjoyDialogs.SCIM.Infrastructure;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace EnjoyDialogs.SCIM.Models
 {
-    
+    //[JsonConverter(typeof(UserModelCustomConverter))]
     public class UserModel : SchemaBaseModel
     {
         /// <summary>
@@ -14,8 +16,8 @@ namespace EnjoyDialogs.SCIM.Models
         /// It MUST be a stable, non-reassignable identifier that does not change when the same resource is returned in subsequent requests. 
         /// The value of the id attribute is always issued by the Service Provider and MUST never be specified by the Service Consumer. REQUIRED.
         /// </summary>
-        [JsonProperty(Required = Required.Always)]
-        public Guid Id { get; set; }
+        [JsonProperty(Required = Required.AllowNull)]
+        public Guid? Id { get; set; }
 
         [JsonProperty(Required = Required.Always)]
         public string UserName { get; set; }
@@ -40,11 +42,23 @@ namespace EnjoyDialogs.SCIM.Models
         public GroupMembershipModel[] Groups { get; set; }
         public x509CertificateModel[] X509Certificates { get; set; }
         public MetaModel Meta { get; set; }
+
     }
 
     public class EnterpriseUserModel : UserModel
     {
-        
         public EnterpriseUserModel EnterpriseUser { get; set; }
     }
+
+    //[JsonConverter(typeof(UserModelCustomConverter))]
+    //internal class UserModelCustomConverter : JsonCreationConverter<UserModel>
+    //{
+    //    protected override UserModel Create(Type objectType, JObject jObject)
+    //    {
+    //        //TODO: read the raw JSON object through jObject to identify the type
+    //        //e.g. here I'm reading a 'typename' property:
+
+    //        return "EnterpriseUserModel".Equals(jObject.Value<string>("typename")) ? new EnterpriseUserModel() : new UserModel();
+    //    }
+    //}
 }

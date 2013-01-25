@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Formatting;
-using System.Web.Http;
+﻿using System.Security.Cryptography;
 using EnjoyDialogs.SCIM.Infrastructure;
 using EnjoyDialogs.SCIM.Models;
 using EnjoyDialogs.SCIM.Services;
+using Newtonsoft.Json;
 using StructureMap;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Formatting;
+using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace EnjoyDialogs.SCIM.Controllers
 {
@@ -70,19 +72,46 @@ namespace EnjoyDialogs.SCIM.Controllers
                 };
         }
 
-        // POST v1/Users
+        //POST //v1/Users HTTP/1.1
+        //Accept: application/json
+        //Content-Type: application/json
+        //Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
+        //User-Agent: Jakarta Commons-HttpClient/3.1
+        //Host: scim.azurewebsites.net
+        //Content-Length: 104
+        //{
+        //  "id": "",
+        //  "schemas": ["urn:scim:schemas:core:1.0"],
+        //  "active": true,
+        //  "userName": "AliceJson2"
+        //}
         [HttpPost]
-        public HttpResponseMessage Post([FromBody]string value)
+        public async Task<HttpResponseMessage> Post()
         {
-            throw new NotImplementedException();
+            string jsonString = await ControllerContext.Request.Content.ReadAsStringAsync();
 
-            var item = new UserModel();
 
-            var response = Request.CreateResponse<UserModel>(HttpStatusCode.Created, item); 
+            //TEMPORARY: MOVE TO UserService!
+            var jsonObj = JsonConvert.DeserializeObject<UserModel>(jsonString);
+            jsonObj.Id = Guid.NewGuid();
 
-            string uri = Url.Link("DefaultApi", new { id = item.Id });
+            string uri = Url.Link("DefaultApi_v1", new {id = jsonObj.Id});
+
+            var now = DateTime.Now;
+            jsonObj.Meta = new MetaModel
+                {
+                    Created = now,
+                    LastModified = now,
+                    Location = uri
+                    //Version = @"W\/""" + GenerateETag(now) + @""""
+                };
+
+
+            var resultString = JsonConvert.SerializeObject(jsonObj);
+
+            var response = Request.CreateResponse(HttpStatusCode.Created, resultString);
             response.Headers.Location = new Uri(uri);
-            return response; 
+            return response;
         }
 
         // PUT v1/Users/5
@@ -110,5 +139,14 @@ namespace EnjoyDialogs.SCIM.Controllers
 
             return new HttpResponseMessage(HttpStatusCode.NoContent);
         }
+
+
+        private string GenerateETag(DateTime lastModified)
+        {
+            var encoding = new System.Text.UTF8Encoding();
+            byte[] checksum = encoding.GetBytes(lastModified.ToUniversalTime().ToString());
+            return Convert.ToBase64String(checksum, 0, checksum.Length);
+        }
+
     }
 }

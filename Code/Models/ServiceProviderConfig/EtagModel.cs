@@ -11,7 +11,7 @@ namespace EnjoyDialogs.SCIM.Models
         /// </summary>
         [Required]
         [JsonProperty(Required = Required.Always)]
-        public bool Supported { get { return true; } }
+        public bool Supported { get { return false; } }
     }
 
 }
