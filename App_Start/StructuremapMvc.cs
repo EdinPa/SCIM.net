@@ -77,14 +77,4 @@ namespace EnjoyDialogs.SCIM
             return container.GetAllInstances(serviceType).Cast<object>();
         }
     }
-
-
-    //public static class ServiceResolverExtensions
-    //{
-    //    public static System.Web.Http.Dependencies.IDependencyResolver ToServiceResolver(this System.Web.Mvc.IDependencyResolver dependencyResolver)
-    //    {
-    //        return new ServiceResolverAdapter(dependencyResolver);
-    //    }
-    //}
-
 }

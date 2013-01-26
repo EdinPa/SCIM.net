@@ -173,7 +173,6 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Code\Consts.cs" />
     <Compile Include="Code\DependencyResolution\ProjectRegistry.cs" />
     <Compile Include="Code\DependencyResolution\StructureMapDependencyResolver.cs" />
     <Compile Include="Code\DependencyResolution\StructureMapDependencyScope.cs" />
@@ -188,36 +187,13 @@
     <Compile Include="Code\Infrastructure\RemoveServerHeaderModule.cs" />
     <Compile Include="Code\Infrastructure\ScimException.cs" />
     <Compile Include="Code\Models\ErrorModel.cs" />
-    <Compile Include="Code\Models\ServiceProviderConfig\PatchModel.cs" />
-    <Compile Include="Code\Models\ServiceProviderConfig\FilterModel.cs" />
-    <Compile Include="Code\Models\ServiceProviderConfig\ChangePasswordModel.cs" />
-    <Compile Include="Code\Models\ServiceProviderConfig\BulkModel.cs" />
-    <Compile Include="Code\Models\ServiceProviderConfig\XmlDataFormatModel.cs" />
-    <Compile Include="Code\Models\ServiceProviderConfig\SortModel.cs" />
-    <Compile Include="Code\Models\ServiceProviderConfig\EtagModel.cs" />
-    <Compile Include="Code\Models\ServiceProviderConfig\AuthenticationScheme.cs" />
-    <Compile Include="Code\Models\User\EnterpriseUserExtension.cs" />
-    <Compile Include="Code\Models\Group\GroupMemberModel.cs" />
-    <Compile Include="Code\Models\Group\GroupModel.cs" />
-    <Compile Include="Code\Models\MetaModel.cs" />
-    <Compile Include="Code\Models\SchemaBaseModel.cs" />
-    <Compile Include="Code\Models\ServiceProviderConfig\ServiceProviderConfigs.cs" />
-    <Compile Include="Code\Models\User\x509CertificateModel.cs" />
-    <Compile Include="Code\Models\User\GroupMembershipModel.cs" />
-    <Compile Include="Code\Models\User\PhotoModel.cs" />
-    <Compile Include="Code\Models\User\InstantMessagingModel.cs" />
-    <Compile Include="Code\Models\User\EmailModel.cs" />
-    <Compile Include="Code\Models\User\PhoneNumberModel.cs" />
-    <Compile Include="Code\Models\User\AddressModel.cs" />
-    <Compile Include="Code\Models\User\NameModel.cs" />
-    <Compile Include="Code\Models\User\UserModel.cs" />
     <Compile Include="Code\Services\GroupService.cs" />
     <Compile Include="Code\Security\AuthenticationProvider.cs" />
     <Compile Include="Code\Services\UserService.cs" />
+    <Compile Include="Controllers\ApiControllerBase.cs" />
     <Compile Include="Controllers\BulkController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Code\Models\SchemaModel.cs" />
     <Compile Include="Controllers\SchemasController.cs" />
     <Compile Include="Controllers\ServiceProviderConfigsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -279,6 +255,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SCIM.net.Data.Contracts\SCIM.net.Data.Contracts.csproj">
+      <Project>{40428fc2-16a9-435f-8bdf-cdeb6bf874a5}</Project>
+      <Name>SCIM.net.Data.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SCIM.net.Data\SCIM.net.Data.csproj">
+      <Project>{11a73cbc-d45b-4598-9aea-f090785df405}</Project>
+      <Name>SCIM.net.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SCIM.net.Model\SCIM.net.Models.csproj">
+      <Project>{d21a8fa6-8f28-4ac6-b8e6-d33a0035380a}</Project>
+      <Name>SCIM.net.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Http;
+using EnjoyDialogs.SCIM.Data.Contracts;
 using EnjoyDialogs.SCIM.Infrastructure;
 using EnjoyDialogs.SCIM.Models;
 
@@ -7,8 +8,13 @@ namespace EnjoyDialogs.SCIM.Controllers
 {
     [AllowAnonymous]
     [ScimExpceptionHandlerFilter]
-    public class SchemasController : ApiController
+    public class SchemasController : ApiControllerBase
     {
+        public SchemasController(IUnitOfWork uow)
+        {
+            Uow = uow;
+        }
+
         [HttpGet]
         public SchemaModel Users(string id = "Users")
         {

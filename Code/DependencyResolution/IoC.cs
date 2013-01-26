@@ -16,6 +16,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 
+using EnjoyDialogs.SCIM.Data;
+using EnjoyDialogs.SCIM.Data.Contracts;
+using EnjoyDialogs.SCIM.Data.Helpers;
+using EnjoyDialogs.SCIM.Models;
 using StructureMap;
 namespace EnjoyDialogs.SCIM.DependencyResolution {
     public static class IoC {
@@ -26,8 +30,20 @@ namespace EnjoyDialogs.SCIM.DependencyResolution {
                                     {
                                         scan.TheCallingAssembly();
                                         scan.WithDefaultConventions();
+
+                                        scan.AssemblyContainingType<IRepositoryProvider>(); //Data
+                                        scan.AssemblyContainingType<IUnitOfWork>(); //Data.Contracts
+                                        scan.AssemblyContainingType<UserModel>(); //Model
+
+                                        scan.LookForRegistries();
                                     });
-            //                x.For<IExample>().Use<Example>();
+
+                            x.For<RepositoryFactories>().Singleton().Use<RepositoryFactories>();
+                            x.For<IRepositoryProvider>().Use<RepositoryProvider>();
+                            x.For<IUnitOfWork>().HybridHttpOrThreadLocalScoped().Use<UnitOfWork>();
+
+                            //x.For<DbContext>().HybridHttpOrThreadLocalScoped().Use<ScimDbContext>();
+                            //x.For<ISessionFactory>().Singleton().Use(() => DatabaseConfigruation.CreateSessionFactory());
                         });
             return ObjectFactory.Container;
         }

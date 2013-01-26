@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
+using EnjoyDialogs.SCIM.Data.Contracts;
 using EnjoyDialogs.SCIM.Infrastructure;
 using EnjoyDialogs.SCIM.Models;
-using EnjoyDialogs.SCIM.Services;
 using Newtonsoft.Json;
 using StructureMap;
 using System;
@@ -16,26 +16,32 @@ namespace EnjoyDialogs.SCIM.Controllers
 {
     [Authorize]
     [ScimExpceptionHandlerFilter]
-    public class UsersController : ApiController
+    public class UsersController : ApiControllerBase
     {
-        private readonly IUserService _userService;
-
-        public UsersController ()
-            : this(ObjectFactory.GetInstance<IUserService>())
+        public UsersController(IUnitOfWork uow)
         {
+            Uow = uow;
         }
 
-        public UsersController (IUserService userService)
-        {
-            if (userService == null) throw new ArgumentException();
-            _userService = userService;
-        }
+        //private readonly IUserService _userService;
+
+        //public UsersController ()
+        //    : this(ObjectFactory.GetInstance<IUserService>())
+        //{
+        //}
+
+        //public UsersController (IUserService userService)
+        //{
+        //    if (userService == null) throw new ArgumentException();
+        //    _userService = userService;
+        //}
 
         // GET v1/Users/
         [HttpGet]
         public IEnumerable<UserModel> Get()
         {
-            var result = _userService.GetAll();
+
+            var result = Uow.Users.GetAll();
 
             return result;
         }
@@ -46,7 +52,7 @@ namespace EnjoyDialogs.SCIM.Controllers
         [ApiParameterDoc("id", "The ID of the user.", typeof(UserModel))]
         public HttpResponseMessage Get(Guid id)
         {
-            var user = _userService.Get(id);
+            var user = Uow.Users.GetById(id);
 
             if (user == null)
             {
@@ -131,11 +137,14 @@ namespace EnjoyDialogs.SCIM.Controllers
         [HttpDelete]
         public HttpResponseMessage Delete(Guid id)
         {
-            var user = _userService.Delete(id);
+            var user = Uow.Users.GetById(id);
             if (user == null)
             {
                 throw new ScimException(HttpStatusCode.NotFound, string.Format("Resource {0} not found", id));
             }
+
+            Uow.Users.Delete(user);
+            Uow.Commit();
 
             return new HttpResponseMessage(HttpStatusCode.NoContent);
         }

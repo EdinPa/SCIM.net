@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using EnjoyDialogs.SCIM.Data.Contracts;
 using EnjoyDialogs.SCIM.Infrastructure;
 using EnjoyDialogs.SCIM.Models;
 using EnjoyDialogs.SCIM.Services;
@@ -9,8 +10,13 @@ namespace EnjoyDialogs.SCIM.Controllers
 {
     [AllowAnonymous]
     [ScimExpceptionHandlerFilter]
-    public class ServiceProviderConfigsController : ApiController
+    public class ServiceProviderConfigsController : ApiControllerBase
     {
+        public ServiceProviderConfigsController(IUnitOfWork uow)
+        {
+            Uow = uow;
+        }
+
         [System.Web.Http.HttpGet]
         public ServiceProviderConfigModel Get()
         {
@@ -77,7 +83,7 @@ namespace EnjoyDialogs.SCIM.Controllers
                     //TODO Read
                     AuthenticationSchemes = new[]
                         {
-                            new AuthenticationScheme
+                            new AuthenticationSchemeModel
                                 {
                                     Name = "OAuth Bearer Token",
                                     Description = "Authentication Scheme using the OAuth Bearer Token Standard",
@@ -86,7 +92,7 @@ namespace EnjoyDialogs.SCIM.Controllers
                                     Type = "oauthbearertoken",
                                     Primary = true
                                 },
-                            new AuthenticationScheme
+                            new AuthenticationSchemeModel
                                 {
                                     Name = "HTTP Basic",
                                     Description = "Authentication Scheme using the Http Basic Standard",

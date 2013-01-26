@@ -5,29 +5,33 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Web.Http;
+using EnjoyDialogs.SCIM.Data.Contracts;
 using EnjoyDialogs.SCIM.Infrastructure;
 using EnjoyDialogs.SCIM.Models;
-using EnjoyDialogs.SCIM.Services;
-using StructureMap;
 
 namespace EnjoyDialogs.SCIM.Controllers
 {
     [Authorize]
     [ScimExpceptionHandlerFilter]
-    public class GroupsController : ApiController
+    public class GroupsController : ApiControllerBase
     {
-        private readonly IGroupService _groupService;
-
-        public GroupsController()
-            : this(ObjectFactory.GetInstance<IGroupService>())
+        public GroupsController(IUnitOfWork uow)
         {
+            Uow = uow;
         }
 
-        public GroupsController(IGroupService groupService)
-        {
-            if (groupService == null) throw new ArgumentException();
-            _groupService = groupService;
-        }
+        //private readonly IGroupService _groupService;
+
+        //public GroupsController()
+        //    : this(ObjectFactory.GetInstance<IGroupService>())
+        //{
+        //}
+
+        //public GroupsController(IGroupService groupService)
+        //{
+        //    if (groupService == null) throw new ArgumentException();
+        //    _groupService = groupService;
+        //}
 
         // GET v1/Groups/
         [HttpGet]
@@ -43,7 +47,7 @@ namespace EnjoyDialogs.SCIM.Controllers
         [HttpGet]
         public HttpResponseMessage Get(Guid id)
         {
-            var group = _groupService.Get(id);
+            var group = Uow.Groups.GetById(id);
 
             if (group == null)
             {
@@ -95,7 +99,7 @@ namespace EnjoyDialogs.SCIM.Controllers
         [HttpDelete]
         public HttpResponseMessage Delete(Guid id)
         {
-            var group = _groupService.Delete(id);
+            var group = Uow.Groups.GetById(id);
             if (group == null)
             {
                 throw new ScimException(HttpStatusCode.NotFound, string.Format("Resource {0} not found", id));
